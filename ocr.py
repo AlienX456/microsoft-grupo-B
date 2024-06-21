@@ -31,10 +31,4 @@ def extract_text_from_pdf(file_name):
         time.sleep(1)
 
     print(f'Finished Textract job with JobId: {response}')
-    # Extract the text from the response
-    extracted_text = ''
-    for item in response['Blocks']:
-        if item['BlockType'] == 'LINE':
-            extracted_text += item['Text'] + '\n'
-
     return run_get_kv_map(response['Blocks'])
