@@ -1,5 +1,4 @@
 import boto3
-import os
 import time
 from textract import run_get_kv_map
 
@@ -30,5 +29,4 @@ def extract_text_from_pdf(file_name):
         status = response['JobStatus']
         time.sleep(1)
 
-    print(f'Finished Textract job with JobId: {response}')
     return run_get_kv_map(response['Blocks'])
