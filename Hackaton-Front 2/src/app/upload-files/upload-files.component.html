@@ -1,0 +1,22 @@
+<hr>
+<div class="jumbotron">
+    <h1 class="display-4">Hackaton -Los Cheveroni-</h1>
+    <p class="lead">Adriana Feijoo, Cristhian Montaño,  Ruben Ninco, Sergio Ramirez, Esteban Romero, Erik Ussa</p>
+    <hr class="my-4">
+    <form (submit)="sendFile($event)">
+        <div class="form-group">
+            <label for="file">Upload PDF:</label>
+            <input type="file" id="file" accept=".pdf" (change)="onFileChange($event)" class="form-control btn-block" multiple>
+        </div>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [(ngModel)]="useLLM" name="sosasa">
+          <label class="form-check-label" for="flexSwitchCheckDefault">Usar LLM para que quede cheveroni?</label>
+        </div>
+        <button [disabled]="disabled" type="submit" class="btn btn-block mt-2 btn-primary">Submit</button>
+    </form>
+
+</div>
+
+
+<hr>
+<ngx-json-viewer [json]="data"></ngx-json-viewer>
