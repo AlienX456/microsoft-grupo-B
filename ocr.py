@@ -5,7 +5,7 @@ from textract import run_get_kv_map
 def extract_text_from_pdf(file_name):
     # Create a Textract client
     textract_client = boto3.client('textract',
-        region_name='us-east-1',
+        region_name='us-east-1'
     )
 
 

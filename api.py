@@ -14,7 +14,7 @@ app = FastAPI()
 llm = OpenAI()
 
 s3_client = boto3.client(
-    's3',
+    's3'
 )
 
 @app.post("/upload")
@@ -30,8 +30,10 @@ async def upload_file(files: list[UploadFile], use_llm: bool = True):
 
         # Extract text from the uploaded PDF file
         extracted_text = extract_text_from_pdf(pdf_uuid)
+        print("extracted_text: ", extracted_text)
         try:
             if use_llm:
+                print("started llm")
                 our_query = f"Clasifica los datos de acuerdo a los siguientes items Nombre, Contacto (Teléfono y Correo Electrónico), Perfil Profesional, Experiencia Laboral (Empresa, Cargo, Periodo de Trabajo, Descripción de Responsabilidades), Educación (Grado Académico, Institución, Periodo de Estudio), Habilidades Técnicas y Blandas, Certificaciones. Si no tiene alguno de los items mencionados indicar 'No aplica' {extracted_text}"
                 response = client.chat.completions.create(
                     model="gpt-3.5-turbo-1106",
