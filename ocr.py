@@ -3,10 +3,10 @@ import os
 import time
 from textract import run_get_kv_map
 
-def extract_text_from_pdf(file_path):
+def extract_text_from_pdf(file_name):
     # Create a Textract client
     textract_client = boto3.client('textract',
-            region_name='us-east-1',
+        region_name='us-east-1',
     )
 
 
@@ -37,30 +37,4 @@ def extract_text_from_pdf(file_path):
         if item['BlockType'] == 'LINE':
             extracted_text += item['Text'] + '\n'
 
-    run_get_kv_map(response['Blocks'])
-
-    
-
-# Path to the folder containing the PDFs
-folder_path = '/Users/erome12/Documents/GitHub/grupo-b-ocr/pdfs'
-
-# Create an S3 client
-s3_client = boto3.client(
-    's3',
-    region_name='us-east-1'
-)
-
-# Iterate over the PDF files in the folder
-for file_name in os.listdir(folder_path):
-    if file_name.endswith('.pdf'):
-        file_path = os.path.join(folder_path, file_name)
-
-        # Upload the PDF file to the S3 bucket
-        s3_client.upload_file(file_path, 'pdf-grupob', file_name)
-
-        # Generate the S3 URL for the uploaded file
-        s3_url = f'https://s3.amazonaws.com/pdf-grupob/{file_name}'
-
-        # Extract text from the uploaded PDF file
-        extracted_text = extract_text_from_pdf(s3_url)
-        print(f'Text extracted from {file_name}:\n{extracted_text}\n')
+    return run_get_kv_map(response['Blocks'])

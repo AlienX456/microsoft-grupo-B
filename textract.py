@@ -69,3 +69,4 @@ def run_get_kv_map(blocks):
     key_map, value_map, block_map = get_kv_map(blocks)
     kvs = get_kv_relationship(key_map, value_map, block_map)
     print(kvs)
+    return kvs
